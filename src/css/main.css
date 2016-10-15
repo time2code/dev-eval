@@ -1,0 +1,56 @@
+/* custom font icons */
+@import "font-icons/style.css";
+
+/* hightlight.js for syntax highlighting */
+@import "github.css";
+
+a {
+  color: #ff4081;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+body {
+  font-size: 15px;
+  line-height: 24px;
+}
+
+div#app {
+  position: fixed;
+  display: flex;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-top: 90px;
+
+}
+.modalis.modal {
+    position: fixed;
+    top: 150px;
+}
+
+header {
+  color: white;
+  background-color: rgb(0, 188, 212);
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+  border-radius: 0px;
+  position: fixed;
+  z-index: 1101;
+  width: 100%;
+  display: flex;
+  padding-left: 24px;
+  padding-right: 24px;
+  top: 0px;
+}
