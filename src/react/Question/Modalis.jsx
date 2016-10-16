@@ -23,20 +23,39 @@ class Modalis extends React.Component {
     }
 
     render() {
+        var button
+        if (this.props.allQuestionsDone) {
+            button = <Button
+                bsStyle="primary"
+                bsSize="large"
+                onClick={this.open.bind(this)}
+            >
+                Finish
+            </Button>
+        } else {
+            button = <Button
+                bsStyle="primary"
+                bsSize="large"
+                onClick={this.open.bind(this)}
+                disabled
+            >
+                Finish
+            </Button>
+        }
+
+
         return (
             <div>
-                <Button
-                    bsStyle="primary"
-                    bsSize="large"
-                    onClick={this.open.bind(this)}
-                >
-                    Finish
-                </Button>
+                {button}
 
                 <Modal className="modalis" show={this.state.showModal} onHide={this.close.bind(this)}>
                     <Modal.Body>
                         <h3>Deval Results</h3>
-                        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+                        <p>
+                            {this.props.oneOptionAnswer}<br/>
+                            {this.props.plainAnswer}<br/>
+                            {this.props.allQuestionsDone.toString()}
+                        </p>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.close.bind(this)}>Close</Button>

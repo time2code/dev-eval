@@ -34,7 +34,8 @@ class PlainAnswer extends React.Component {
     }
 
     handleChange(e) {
-        this.setState({value: e.target.value});
+        this.setState({value: e.target.value})
+        this.props.collectPlainAnswer(e.target.value)
     }
 
     getValidationState() {

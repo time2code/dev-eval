@@ -42,10 +42,11 @@ class OneOption extends React.Component {
     }
 
     handleRadioClick(key) {
-        console.log('You have selected:', key);
+        //console.log('You have selected:', key);
         this.setState({
             selectedRadio : key
         })
+        this.props.collectOneOptionAnswer(key)
     }
 
 }

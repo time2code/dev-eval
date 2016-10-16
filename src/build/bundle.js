@@ -51,10 +51,6 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _AwesomeComponent = __webpack_require__(/*! ./AwesomeComponent.jsx */ 1);
-	
-	var _AwesomeComponent2 = _interopRequireDefault(_AwesomeComponent);
-	
 	var _reactTapEventPlugin = __webpack_require__(/*! react-tap-event-plugin */ 35);
 	
 	var _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);
@@ -114,12 +110,19 @@
 	    function App() {
 	        _classCallCheck(this, App);
 	
-	        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+	
+	        _this.state = {
+	            oneOptionAnswer: 'none',
+	            plainAnswer: 'none'
+	        };
+	        return _this;
 	    }
 	
 	    _createClass(App, [{
 	        key: 'render',
 	        value: function render() {
+	            var allQuestionsDone = this.isAllQuestionsDone();
 	            return React.createElement(
 	                'div',
 	                null,
@@ -131,12 +134,38 @@
 	                        null,
 	                        'JSX'
 	                    ),
-	                    React.createElement(_OneOption2.default, { question: 'What is JSX' }),
-	                    React.createElement(_PlainAnswer2.default, { question: 'React DOM property name for \'class\' attribute' }),
+	                    React.createElement(_OneOption2.default, { question: 'What is JSX',
+	                        collectOneOptionAnswer: this.collectOneOptionAnswer.bind(this) }),
+	                    React.createElement(_PlainAnswer2.default, { question: 'React DOM property name for \'class\' attribute',
+	                        collectPlainAnswer: this.collectPlainAnswer.bind(this) }),
 	                    React.createElement(_MultiOption2.default, { question: 'Select statement that is true for JSX' }),
-	                    React.createElement(_Modalis2.default, null)
+	                    React.createElement(_Modalis2.default, {
+	                        oneOptionAnswer: this.state.oneOptionAnswer,
+	                        plainAnswer: this.state.plainAnswer,
+	                        allQuestionsDone: allQuestionsDone
+	                    })
 	                )
 	            );
+	        }
+	    }, {
+	        key: 'collectOneOptionAnswer',
+	        value: function collectOneOptionAnswer(key) {
+	            this.setState({
+	                oneOptionAnswer: key
+	            });
+	        }
+	    }, {
+	        key: 'collectPlainAnswer',
+	        value: function collectPlainAnswer(answer) {
+	            this.setState({
+	                plainAnswer: answer
+	            });
+	        }
+	    }, {
+	        key: 'isAllQuestionsDone',
+	        value: function isAllQuestionsDone() {
+	            return;
+	            this.state.oneOptionAnswer !== 'none' && this.state.plainAnswer;
 	        }
 	    }]);
 	
@@ -146,82 +175,7 @@
 	ReactDOM.render(React.createElement(App, null), document.getElementById('app'));
 
 /***/ },
-/* 1 */
-/*!****************************************!*\
-  !*** ./src/react/AwesomeComponent.jsx ***!
-  \****************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var AwesomeComponent = function (_React$Component) {
-	    _inherits(AwesomeComponent, _React$Component);
-	
-	    function AwesomeComponent(props) {
-	        _classCallCheck(this, AwesomeComponent);
-	
-	        var _this = _possibleConstructorReturn(this, (AwesomeComponent.__proto__ || Object.getPrototypeOf(AwesomeComponent)).call(this, props));
-	
-	        _this.state = { likesCount: 0 };
-	        _this.onLike = _this.onLike.bind(_this);
-	        return _this;
-	    }
-	
-	    _createClass(AwesomeComponent, [{
-	        key: 'onLike',
-	        value: function onLike() {
-	            var newLikesCount = this.state.likesCount + 1;
-	            this.setState({ likesCount: newLikesCount });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                'Likes : ',
-	                _react2.default.createElement(
-	                    'span',
-	                    null,
-	                    this.state.likesCount
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    _react2.default.createElement(
-	                        'button',
-	                        { onClick: this.onLike },
-	                        'Like Me'
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-	
-	    return AwesomeComponent;
-	}(_react2.default.Component);
-	
-	exports.default = AwesomeComponent;
-
-/***/ },
+/* 1 */,
 /* 2 */
 /*!**************************!*\
   !*** ./~/react/react.js ***!
@@ -50886,10 +50840,11 @@
 	    }, {
 	        key: 'handleRadioClick',
 	        value: function handleRadioClick(key) {
-	            console.log('You have selected:', key);
+	            //console.log('You have selected:', key);
 	            this.setState({
 	                selectedRadio: key
 	            });
+	            this.props.collectOneOptionAnswer(key);
 	        }
 	    }]);
 	
@@ -50976,6 +50931,7 @@
 	        key: 'handleChange',
 	        value: function handleChange(e) {
 	            this.setState({ value: e.target.value });
+	            this.props.collectPlainAnswer(e.target.value);
 	        }
 	    }, {
 	        key: 'getValidationState',
@@ -51153,10 +51109,9 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
+	            var button;
+	            if (this.props.allQuestionsDone) {
+	                button = _react2.default.createElement(
 	                    _reactBootstrap.Button,
 	                    {
 	                        bsStyle: 'primary',
@@ -51164,7 +51119,24 @@
 	                        onClick: this.open.bind(this)
 	                    },
 	                    'Finish'
-	                ),
+	                );
+	            } else {
+	                button = _react2.default.createElement(
+	                    _reactBootstrap.Button,
+	                    {
+	                        bsStyle: 'primary',
+	                        bsSize: 'large',
+	                        onClick: this.open.bind(this),
+	                        disabled: true
+	                    },
+	                    'Finish'
+	                );
+	            }
+	
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                button,
 	                _react2.default.createElement(
 	                    _reactBootstrap.Modal,
 	                    { className: 'modalis', show: this.state.showModal, onHide: this.close.bind(this) },
@@ -51179,7 +51151,11 @@
 	                        _react2.default.createElement(
 	                            'p',
 	                            null,
-	                            'Duis mollis, est non commodo luctus, nisi erat porttitor ligula.'
+	                            this.props.oneOptionAnswer,
+	                            _react2.default.createElement('br', null),
+	                            this.props.plainAnswer,
+	                            _react2.default.createElement('br', null),
+	                            this.props.allQuestionsDone.toString()
 	                        )
 	                    ),
 	                    _react2.default.createElement(

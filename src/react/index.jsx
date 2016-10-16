@@ -1,6 +1,5 @@
 "use strict";
 
-import AwesomeComponent from './AwesomeComponent.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MyAwesomeReactComponent from './MyAwesomeReactComponent.jsx';
@@ -26,19 +25,54 @@ const title = (
 );
 
 class App extends React.Component {
-    render() {
-        return (
 
+    constructor() {
+        super()
+
+        this.state = {
+            oneOptionAnswer : 'none',
+            plainAnswer : 'none',
+        }
+    }
+
+    render() {
+        let allQuestionsDone = this.isAllQuestionsDone();
+        return (
         <div>
             <Panel bsStyle="info">
                 <PageHeader>JSX</PageHeader>
-                <OneOption question="What is JSX"/>
-                <PlainAnswer question="React DOM property name for 'class' attribute"/>
+                <OneOption question="What is JSX"
+                           collectOneOptionAnswer={this.collectOneOptionAnswer.bind(this)}/>
+                <PlainAnswer question="React DOM property name for 'class' attribute"
+                             collectPlainAnswer={this.collectPlainAnswer.bind(this)}/>
                 <MultiOption question="Select statement that is true for JSX"/>
-                <Modalis/>
+                <Modalis
+                    oneOptionAnswer={this.state.oneOptionAnswer}
+                    plainAnswer={this.state.plainAnswer}
+                    allQuestionsDone={allQuestionsDone}
+                />
             </Panel>
         </div>
         )
+    }
+
+    collectOneOptionAnswer(key) {
+        this.setState({
+            oneOptionAnswer : key,
+        })
+    }
+
+    collectPlainAnswer(answer) {
+        this.setState({
+            plainAnswer : answer,
+        })
+    }
+
+    isAllQuestionsDone() {
+        return
+            this.state.oneOptionAnswer !== 'none'
+            &&
+            this.state.plainAnswer
     }
 }
 
